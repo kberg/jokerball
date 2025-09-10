@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <title>Jokerball</title>
+    <script src="utils.js"></script>
+    <script src="coords.js"></script>
+    <script src="grid.js"></script>
+    <script src="game.js"></script>
+    <script src="render.js"></script>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    Jokerball state: alpha. It's still broken.
+    <div id="summary">
+      Turn: <span id="turn"></span>
+        <span id="message"></span>
+        <span id="dice">
+          Checker: <span id="checker-die"></span>
+          Ball: <span id="ball-die"></span>
+        </span>
+        <span id="roll"><button type="button" id="rollButton">Click to roll</button></span>
+        <div id="noaction"><span id="noaction-text"></span> <button type="button" id="okButton">OK</button></button></div>
+    </div>
+    <div id="hex-grid"></div>
+    <p>
+    Jokerball is a 2 player game. This version of the game is played with both players at one computer. How quaint!
+    </br>
+    Designed by Mark Steele. <a href="https://www.marksteeregames.com/Jokerball_rules.pdf" target="_blank">Rules</a>
+    Written by Robert Konigsberg. Published under the <a href="https://raw.githubusercontent.com/kberg/jokerball/refs/heads/main/LICENSE" target="_blank">Unilicense</a>
+  </body>
+</html>

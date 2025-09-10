@@ -1,0 +1,109 @@
+:root {
+  --hex-size: 30px;
+  --hex-width: calc(var(--hex-size) * 1.732); /* √3 * size */
+  --hex-height: calc(var(--hex-size) * 2); /* 2 * size */
+  --hex-margin-x: calc(var(--hex-size) * 1.5);
+  --hex-margin-y: calc(var(--hex-size) * 0.866); /* 0.5 * √3 * size */
+  --hex-background-color: #ccc;
+  --hex-background-color-selectable: #fff;
+}
+
+#summary {
+  height: 200px;
+}
+
+#hex-grid {
+  height: 400px;
+  margin-top: 100px;
+  margin-left: 100px;
+}
+html {
+  font-size: 30px;
+}
+
+.hex {
+  position: absolute;
+  width: var(--hex-width);
+  height: var(--hex-height);
+  clip-path: polygon(0% 25%, 0% 75%, 50% 100%, 100% 75%, 100% 25%, 50% 0%);
+  background-color: var(--hex-background-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 10px;
+  color: white;
+}
+
+.disc {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: black;
+}
+
+.type-goal {
+  background: transparent;
+  /* background-color: purple; */
+  /* clip-path: polygon(0% 75%, 50% 100%, 100% 75%); */
+}
+
+/* .border-s {
+  transform: rotate(180deg);
+} */
+
+.type-wall {
+  background: transparent;
+  /* background: black; */
+  /* clip-path: polygon(0% 75%, 50% 100%, 100% 75%); */
+}
+
+/* .border-nw {
+  transform: rotate(300deg);
+}
+
+.border-sw {
+  transform: rotate(240deg);
+}
+
+.border-ne {
+  transform: rotate(270deg);
+}
+
+.border-se {
+  transform: rotate(120deg);
+} */
+
+
+.ball {
+  background: green;
+}
+
+.red {
+  background: red;
+}
+
+.blue {
+  background: blue;
+}
+
+@keyframes selectable-flash-effect {
+  0% {
+    background-color: var(--hex-background-color);
+  }
+  50% {
+    background-color: var(--hex-background-color-selectable);
+  }
+  100% {
+    background-color: var(--hex-background-color);
+  }
+}
+
+.selectable {
+  animation-name: selectable-flash-effect;
+  animation-duration: 2s; /* The duration of one full animation cycle */
+  animation-iteration-count: infinite; /* The animation will repeat forever */
+
+  :hover {
+    background-color: black;
+  }
+}
