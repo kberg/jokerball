@@ -43,36 +43,11 @@ html {
 
 .type-goal {
   background: transparent;
-  /* background-color: purple; */
-  /* clip-path: polygon(0% 75%, 50% 100%, 100% 75%); */
 }
-
-/* .border-s {
-  transform: rotate(180deg);
-} */
 
 .type-wall {
   background: transparent;
-  /* background: black; */
-  /* clip-path: polygon(0% 75%, 50% 100%, 100% 75%); */
 }
-
-/* .border-nw {
-  transform: rotate(300deg);
-}
-
-.border-sw {
-  transform: rotate(240deg);
-}
-
-.border-ne {
-  transform: rotate(270deg);
-}
-
-.border-se {
-  transform: rotate(120deg);
-} */
-
 
 .ball {
   background: green;
