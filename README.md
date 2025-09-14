@@ -1,5 +1,5 @@
 # Jokerball
-Implementaiton of Jokerball by Mark Steele
+Implementaiton of Jokerball by Mark Steere
 
 Play at https://kberg.github.io/jokerball/ as a two-player side-by-side game.
 
