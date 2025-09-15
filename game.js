@@ -278,6 +278,18 @@ class Game {
     this.cb(this);
   }
 
+  unselect() {
+  switch (this.state) {
+      case State.MOVE_CHECKER:
+      // case State.MOVE_BALL: // MOVE_BALL could work if the entire grid's state was saved.
+        this.state = State.SELECT_CHECKER;
+        this.selectedChecker = undefined;
+        this.#setSelectableCheckers();
+        this.cb(this);
+        break;
+    }
+  }
+
   okPressed() {
     switch (this.state) {
     case State.ROLL:

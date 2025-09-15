@@ -6,15 +6,7 @@ const $ = function( id ) { return document.getElementById( id ); };
  */
 const DIRECTION_CHARS = [
     '&rarr;', '&nearr;', '&nwarr;', '&larr;', '&swarr;', '&searr;'
-  // '→', '↗', '↖', '←', '↙', '↘'
 ];
-
-// window.onerror = function (message, source, lineno, colno, error) {
-//   window.alert(message);
-//   console.error("Error:", message, "at", source, "line", lineno, "column", colno, "Error object:", error);
-//   // Returning true prevents the default browser error handling (e.g., console logging)
-//   return true;
-// };
 
 function hexToElement(hex) {
   const hexElement = document.createElement('div');
@@ -55,7 +47,9 @@ document.addEventListener('DOMContentLoaded', () => {
     hexElement.onclick = () => {
       const idx = Number(hexElement.dataset.idx);
       if (game.selectableSpaces.includes(idx)) {
-        game.spaceSelected(idx)
+        game.spaceSelected(idx);
+      } else {
+        game.unselect(idx);
       }
     }
     gridContainer.appendChild(hexElement);
