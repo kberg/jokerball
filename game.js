@@ -7,6 +7,9 @@ const State = {
 };
 
 class Game {
+  /** Array<[idx, occupied] */
+  #savedMoves = [];
+
   constructor() {
     this.grid = new Grid(6);
     this.ball = coords(0, 0);
@@ -197,6 +200,9 @@ class Game {
   #moveChecker(destinationHex) {
     const srcHex = this.grid.hexes[this.selectedChecker];
 
+    this.#savedMoves.push([srcHex.idx, srcHex.occupied]);
+    this.#savedMoves.push([destinationHex.idx, destinationHex.occupied]);
+
     // Move occupied reference, unless it's a checker going out of a goal.
     if (destinationHex.type !== HexType.GOAL) {
       destinationHex.occupied = srcHex.occupied;
@@ -251,9 +257,12 @@ class Game {
   unselect() {
   switch (this.state) {
       case State.MOVE_CHECKER:
-      // case State.MOVE_BALL: // MOVE_BALL could work if the entire grid's state was saved.
+      case State.MOVE_BALL:
         this.state = State.SELECT_CHECKER;
         this.selectedChecker = undefined;
+        for (const [idx, occupied] of this.#savedMoves) {
+          this.grid.hexes[idx].occupied = occupied;
+        }
         this.#setSelectableCheckers();
         this.cb(this);
         break;
@@ -285,6 +294,7 @@ class Game {
       if (this.selectableSpaces.length === 0) {
         this.player = (this.player + 1) % 2;
         this.state = State.ROLL;
+        this.#savedMoves = [];
       } else {
         throw new Error('Not valid to press OK when there are selectable checkers');
       }
