@@ -55,8 +55,9 @@ document.addEventListener('DOMContentLoaded', () => {
     gridContainer.appendChild(hexElement);
   });
 
+  // Could compress into one div
   $('rollButton').onclick = () => {
-    game.roll();
+    game.okPressed();
   };
   $('okButton').onclick = () => {
     game.okPressed();
@@ -137,20 +138,9 @@ function drawState(game) {
     switch(hex.type) {
     case HexType.GOAL:
       hexElement.classList.add('type-goal');
-      // if (hex.coords.r === -6) {
-      //   hexElement.classList.add('border-n');
-      // } else {
-      //   hexElement.classList.add('border-s');
-      // }
       break;
     case HexType.WALL:
       hexElement.classList.add('type-wall');
-      // if (hex.coords.s === 6) {
-      //   hexElement.classList.add('border-nw');
-      // } else if (hex.coords.s === -6) {
-      //   hexElement.classList.add('border-se');
-      // } else {
-      //   hexElement.classList.add('border-s');
       // }
       break;
     case HexType.PLAY_AREA:
@@ -174,7 +164,7 @@ function drawState(game) {
     }
   }
 
-  const playerColor = game.players[game.player].color;
+  const playerColor = game.players[game.player];
   $('turn').textContent = playerColor;
   $('turn').style.color = playerColor;
   $('roll').style.display = game.state === State.ROLL ? 'inline' : 'none';

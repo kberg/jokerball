@@ -1,22 +1,3 @@
-class Player {
-  #checkers = [];
-  /**
-   * @param {string} color
-   * @param {Array<Coord>} coords
-   */
-  constructor(color, coords) {
-    this.color = color;
-    this.#checkers = coords;
-  }
-
-  assignToGrid(grid) {
-    for (const checker of this.#checkers) {
-      const hex = grid.getHex(checker);
-      hex.occupied = this.color;
-    }
-  }
-}
-
 const State = {
   ROLL: 'roll',
   SELECT_CHECKER: 'select-checker',
@@ -41,22 +22,19 @@ class Game {
         ...range(-5, 1).map((q) => coords(q, 4)),
         ...range(-5, 0).map((q) => coords(q, 5))
     ];
+    for (const checker of redCheckers) {
+      this.grid.getHex(checker).occupied = Occupied.RED;
+    }
+
     const blueCheckers = [
       ...range(0, 5).map((q) => coords(q, -5)),
       ...range(-1, 5).map((q) => coords(q, -4))
     ];
-
-    for (const checker of redCheckers) {
-      this.grid.getHex(checker).occupied = Occupied.RED;
-    }
     for (const checker of blueCheckers) {
       this.grid.getHex(checker).occupied = Occupied.BLUE;
     }
 
-    this.players = [
-      new Player('red', redCheckers),
-      new Player('blue', blueCheckers),
-    ];
+    this.players = ['red', 'blue'];
 
     this.#buildWalls();
     this.#buildGoals();
@@ -119,19 +97,11 @@ class Game {
   #setSelectableCheckers() {
     const player = this.players[this.player];
     this.selectableSpaces = this.grid.hexes.filter((hex) => {
-      if (hex.occupied !== player.color) {
+      if (hex.occupied !== player) {
         return false;
       }
       return this.#getCheckerDestinations(hex).length > 0;s
     }).map((hex) => hex.idx);
-  }
-
-  roll() {
-    this.checkerDie = Math.floor(Math.random() * 6) + 1;
-    this.ballDie = Math.floor(Math.random() * 6) + 1;
-    this.state = State.SELECT_CHECKER;
-    this.#setSelectableCheckers();
-    this.cb(this);
   }
 
   /**
@@ -293,8 +263,10 @@ class Game {
   okPressed() {
     switch (this.state) {
     case State.ROLL:
-      // inline?
-      this.roll();
+      this.checkerDie = Math.floor(Math.random() * 6) + 1;
+      this.ballDie = Math.floor(Math.random() * 6) + 1;
+      this.state = State.SELECT_CHECKER;
+      this.#setSelectableCheckers();
       break;
 
     case State.SELECT_CHECKER:
